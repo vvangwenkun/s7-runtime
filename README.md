@@ -6,13 +6,13 @@ A production-grade S7 PLC communication library built on `node-snap7`, featuring
 
 ## 🚀 Core Features | 核心特性
 
-✅ Layered Design: Lightweight IO client + high-availability session layer (choose as needed)
-✅ Auto Reconnection: Exponential backoff retry on connection failures (configurable strategy)
-✅ Heartbeat Detection: Toggle-bit/sequence heartbeat modes to detect connection status in real-time
-✅ Concurrent Scheduling: Multi-priority IO queues (NORMAL/URGENT/HEARTBEAT/RECONNECT) to avoid buffer conflicts
-✅ State Management: State machine-based connection lifecycle with event-driven state notifications
-✅ Strict Validation: Built-in input validation to prevent illegal operations
-✅ Friendly Error Handling: Classified S7 error types with error codes and context
+✅ Layered Design: Lightweight IO client + high-availability session layer (choose as needed)  
+✅ Auto Reconnection: Exponential backoff retry on connection failures (configurable strategy)  
+✅ Heartbeat Detection: Toggle-bit/sequence heartbeat modes to detect connection status in real-time  
+✅ Concurrent Scheduling: Multi-priority IO queues (NORMAL/URGENT/HEARTBEAT/RECONNECT) to avoid buffer conflicts  
+✅ State Management: State machine-based connection lifecycle with event-driven state notifications  
+✅ Strict Validation: Built-in input validation to prevent illegal operations  
+✅ Friendly Error Handling: Classified S7 error types with error codes and context  
 ✅ Thread Safety: Serialized IO operations for multi-scenario invocation
 
 ✅ **分层设计**：轻量 IO 客户端 + 高可用会话层，按需选择  
@@ -157,7 +157,7 @@ process.on('SIGINT', () => {
 - **Connection State**：DISCONNECTED → CONNECTING → CONNECTED → WAITING_FOR_RETRY (full event-driven notifications)
 - **Heartbeat Mode**：`TOGGLE_BIT` (single bit flip) / `SEQUENCE` (16-bit auto-increment) (adapt to PLC logic)
 
-- **IO 优先级**：NORMAL（普通）< HEARTBEAT（心跳）< URGENT（紧急）< RECONNECT（重连），调度器按优先级串行执行
+- **IO 优先级**：NORMAL < HEARTBEAT < URGENT < RECONNECT，调度器按优先级串行执行
 - **连接状态**：DISCONNECTED → CONNECTING → CONNECTED → WAITING_FOR_RETRY，全状态事件化通知
 - **心跳模式**：`TOGGLE_BIT`（单比特翻转）/ `SEQUENCE`（16位序列自增），按需选择适配 PLC 逻辑
 
