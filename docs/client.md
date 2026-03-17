@@ -346,10 +346,6 @@ Set PLC date and time.
 | --------- | ------ | ---------------------- |
 | dateTime  | `Date` | Target datetime to set |
 
-| 参数     | 类型   | 描述                 |
-| -------- | ------ | -------------------- |
-| dateTime | `Date` | 要设置的目标日期时间 |
-
 ---
 
 #### `SetPlcSystemDateTime(timeout?: number, level?: IOLevel): Promise<void>`

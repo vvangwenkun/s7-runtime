@@ -59,7 +59,7 @@ import {
 // Create session with options
 const session = new S7ClientSession({
 	connect: {
-		ip: '127.0.0.1',
+		ip: '192.168.1.10',
 		port: 102,
 		addressType: AddressType.RACK_SLOT,
 		rack: 0,
@@ -70,7 +70,7 @@ const session = new S7ClientSession({
 		interval: 1500,
 		maxFailures: 5,
 		mode: HeartbeatPingMode.TOGGLE_BIT,
-		dbNumber: 2026,
+		dbNumber: 10,
 		start: 0,
 	},
 	reconnect: {
@@ -87,7 +87,7 @@ session.on('connect', async () => {
 	buf.write('aric', 'utf-8');
 
 	// Use IO methods
-	await session.dbWrite(2026, 10, 4, buf, 2000, IOLevel.NORMAL);
+	await session.dbWrite(10, 10, 4, buf, 2000, IOLevel.NORMAL);
 });
 ```
 
@@ -276,8 +276,8 @@ session.on('disconnect', (sessionId) => {
 	console.log(`Disconnected: ${sessionId}`);
 });
 
-session.on('reconnecting', (sessionId, attempt) => {
-	console.log(`Reconnecting: ${sessionId}, attempt: ${attempt}`);
+session.on('waitingForRetry', (sessionId, attempt) => {
+	console.log(`waitingForRetry: ${sessionId}, attempt: ${attempt}`);
 });
 
 session.on('error', (sessionId, error) => {
@@ -291,12 +291,12 @@ session.on('error', (sessionId, error) => {
 
 ### State Enum | 状态枚举
 
-| State        | Description                                              |
-| ------------ | -------------------------------------------------------- |
-| DISCONNECTED | Session is disconnected (initial state)                  |
-| CONNECTING   | Connection attempt in progress                           |
-| CONNECTED    | Session is connected and active                          |
-| RECONNECTING | Reconnection attempt in progress (after connection loss) |
+| State             | Description                                              |
+| ----------------- | -------------------------------------------------------- |
+| DISCONNECTED      | Session is disconnected (initial state)                  |
+| CONNECTING        | Connection attempt in progress                           |
+| CONNECTED         | Session is connected and active                          |
+| WAITING_FOR_RETRY | Reconnection attempt in progress (after connection loss) |
 
 ### State Transition Diagram | 状态转换图
 
