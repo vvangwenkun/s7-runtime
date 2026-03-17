@@ -198,9 +198,13 @@ export class S7ClientSession
 		const sm = new ConnStateMachine(3, this.handleEffect.bind(this));
 
 		sm.onState((prev, next) => {
-			this.logger.debug(
-				`[S7ClientRuntime] [${this.getSessionId()}] State: ${prev} => ${next}`,
-			);
+			this.logger.debug({
+				message: 'state change',
+				module: 'S7ClientRuntime',
+				sessionId: this.getSessionId(),
+				prevState: prev,
+				nextState: next,
+			});
 
 			this.emit('connState', prev, next);
 		});
@@ -255,10 +259,14 @@ export class S7ClientSession
 		});
 
 		hb.on('dead', (error) => {
-			this.logger.error(
-				`[S7ClientRuntime] [${this.getSessionId()}] Heartbeat dead: ${error.message}`,
-				error.toJSON(),
-			);
+			this.logger.error({
+				message: 'heartbeat dead',
+				module: 'S7ClientRuntime',
+				sessionId: this.getSessionId(),
+				error: error.toJSON(),
+			});
+
+			this.emit('heartbeatDead', this.getSessionId(), error);
 
 			this.sm.dispatch({
 				type: ActionType.IO_NETWORK_ERROR,
@@ -282,18 +290,26 @@ export class S7ClientSession
 	}
 
 	private async handleEffect(e: Effect) {
-		this.logger.debug(
-			`[S7ClientRuntime] [${this.getSessionId()}] effect=${e.type} state=${this.sm.getState()}`,
-		);
+		const sessionId = this.getSessionId();
+
+		this.logger.debug({
+			message: 'handle effect',
+			module: 'S7ClientRuntime',
+			sessionId,
+			effect: e.type,
+			state: this.sm.getState(),
+		});
 
 		try {
 			switch (e.type) {
 				case EffectType.CONNECT:
 					if (this.destroyed) return;
 
-					this.logger.info(
-						`[S7ClientRuntime] [${this.getSessionId()}] Connecting...`,
-					);
+					this.logger.info({
+						message: 'connecting',
+						module: 'S7ClientRuntime',
+						sessionId,
+					});
 
 					this.emit('connecting', this.getSessionId());
 
@@ -316,9 +332,11 @@ export class S7ClientSession
 					break;
 
 				case EffectType.DISCONNECT:
-					this.logger.info(
-						`[S7ClientRuntime] [${this.getSessionId()}] Disconnecting...`,
-					);
+					this.logger.info({
+						message: 'disconnecting',
+						module: 'S7ClientRuntime',
+						sessionId,
+					});
 
 					this.s7Client.Disconnect();
 
@@ -333,9 +351,11 @@ export class S7ClientSession
 						e.payload instanceof S7Error &&
 						this.shouldReconnect(e.payload.code)
 					) {
-						this.logger.debug(
-							`[S7ClientRuntime] [${this.getSessionId()}]  Start reconnect retry...`,
-						);
+						this.logger.debug({
+							message: 'start reconnect retry',
+							module: 'S7ClientRuntime',
+							sessionId,
+						});
 
 						this.retrying = true;
 
@@ -358,9 +378,11 @@ export class S7ClientSession
 					break;
 
 				case EffectType.STOP_RETRY_TIMER:
-					this.logger.debug(
-						`[S7ClientRuntime] [${this.getSessionId()}]  Stop reconnect retry...`,
-					);
+					this.logger.debug({
+						message: 'stop reconnect retry',
+						module: 'S7ClientRuntime',
+						sessionId,
+					});
 
 					this.retrying = false;
 
@@ -387,11 +409,14 @@ export class S7ClientSession
 					break;
 			}
 		} catch (err) {
-			this.logger.error(
-				`[S7ClientRuntime] [${this.getSessionId()}] Error: ${err}`,
-			);
+			this.logger.error({
+				message: 'handle effect error',
+				module: 'S7ClientRuntime',
+				sessionId,
+				error: err,
+			});
 
-			this.emit('error', this.getSessionId(), err as Error);
+			this.emit('runtimeError', this.getSessionId(), err as Error);
 		}
 	}
 }

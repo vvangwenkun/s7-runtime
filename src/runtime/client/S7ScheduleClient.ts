@@ -178,6 +178,7 @@ class S7ScheduleClient implements S7ScheduleClientMethods {
 			dbNumber,
 			start,
 			amount,
+			buffer,
 			timeout,
 			level,
 		});
@@ -242,7 +243,7 @@ class S7ScheduleClient implements S7ScheduleClientMethods {
 		timeout = 2000,
 		level = IOLevel.NORMAL,
 	) {
-		validateParams({ dbNumber, start, size, timeout, level });
+		validateParams({ dbNumber, start, size, buffer, timeout, level });
 
 		return this.executeIO(
 			() =>
@@ -273,6 +274,7 @@ class S7ScheduleClient implements S7ScheduleClientMethods {
 		validateParams({
 			dbNumber,
 			start,
+			buffer,
 			timeout,
 		});
 
@@ -311,7 +313,7 @@ class S7ScheduleClient implements S7ScheduleClientMethods {
 		buffer: Buffer,
 		timeout = 2000,
 	) {
-		validateParams({ dbNumber, start, size, timeout });
+		validateParams({ dbNumber, start, size, buffer, timeout });
 
 		return this.executeIO(
 			() =>
@@ -360,7 +362,7 @@ class S7ScheduleClient implements S7ScheduleClientMethods {
 		timeout = 2000,
 		level = IOLevel.NORMAL,
 	) {
-		validateParams({ start, size, timeout, level });
+		validateParams({ start, size, buffer, timeout, level });
 
 		return this.executeIO(
 			() =>
@@ -402,7 +404,7 @@ class S7ScheduleClient implements S7ScheduleClientMethods {
 		timeout = 2000,
 		level = IOLevel.NORMAL,
 	) {
-		validateParams({ start, size, timeout, level });
+		validateParams({ start, size, buffer, timeout, level });
 
 		return this.executeIO(
 			() =>
@@ -444,7 +446,7 @@ class S7ScheduleClient implements S7ScheduleClientMethods {
 		timeout = 2000,
 		level = IOLevel.NORMAL,
 	): Promise<void> {
-		validateParams({ start, size, timeout, level });
+		validateParams({ start, size, buffer, timeout, level });
 
 		return this.executeIO(
 			() =>
@@ -486,7 +488,7 @@ class S7ScheduleClient implements S7ScheduleClientMethods {
 		timeout = 2000,
 		level = IOLevel.NORMAL,
 	) {
-		validateParams({ start, amount, timeout, level });
+		validateParams({ start, amount, buffer, timeout, level });
 
 		return this.executeIO(
 			() =>
@@ -528,7 +530,7 @@ class S7ScheduleClient implements S7ScheduleClientMethods {
 		timeout = 2000,
 		level = IOLevel.NORMAL,
 	) {
-		validateParams({ start, amount, timeout, level });
+		validateParams({ start, amount, buffer, timeout, level });
 
 		return this.executeIO(
 			() =>
@@ -589,6 +591,7 @@ class S7ScheduleClient implements S7ScheduleClientMethods {
 				dbNumber: item.DBNumber,
 				start: item.Start,
 				amount: item.Amount,
+				buffer: item.Data,
 			}),
 		);
 

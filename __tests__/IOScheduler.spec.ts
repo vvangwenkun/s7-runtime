@@ -37,7 +37,7 @@ describe('IOScheduler', () => {
 		expect(mockTracker.record).toHaveBeenCalledTimes(1);
 	});
 
-	it.only('should reject when queue size exceeds limit', async () => {
+	it('should reject when queue size exceeds limit', async () => {
 		(scheduler as any).maxQueueSize.normal = 2;
 
 		const mockFn = () => Promise.resolve();

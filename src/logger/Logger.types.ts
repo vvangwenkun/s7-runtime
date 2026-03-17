@@ -1,7 +1,11 @@
+type LogPayload = {
+	message: string;
+	[key: string]: any;
+};
+
 export interface Logger {
-	trace?(msg: string, ...args: any[]): void;
-	debug(msg: string, ...args: any[]): void;
-	info(msg: string, ...args: any[]): void;
-	warn(msg: string, ...args: any[]): void;
-	error(msg: string, ...args: any[]): void;
+	debug(payload: LogPayload): void;
+	info(payload: LogPayload): void;
+	warn(payload: LogPayload): void;
+	error(payload: LogPayload): void;
 }

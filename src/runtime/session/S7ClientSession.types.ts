@@ -69,8 +69,9 @@ export interface S7ClientSessionEvent {
 	connect: [sessionId: string];
 	waitingForRetry: [sessionId: string, attempt: number];
 	disconnect: [sessionId: string];
-	error: [sessionId: string, exception: Error];
+	runtimeError: [sessionId: string, exception: Error];
 	connState: [prev: State, next: State];
+	heartbeatDead: [sessionId: string, exception: Error];
 }
 
 export type SessionIOMethods = {
