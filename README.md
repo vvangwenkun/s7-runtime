@@ -124,7 +124,7 @@ session.on('disconnect', (sessionId) => {
 session.on('waitingForRetry', (sessionId, attempt) => {
 	console.log(`Reconnecting [${attempt}]：${sessionId}`);
 });
-session.on('error', (sessionId, error) => {
+session.on('runtimeError', (sessionId, error) => {
 	console.error(`Session error [${sessionId}]：`, error);
 });
 

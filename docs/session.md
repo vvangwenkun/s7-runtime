@@ -280,7 +280,7 @@ session.on('waitingForRetry', (sessionId, attempt) => {
 	console.log(`waitingForRetry: ${sessionId}, attempt: ${attempt}`);
 });
 
-session.on('error', (sessionId, error) => {
+session.on('runtimeError', (sessionId, error) => {
 	console.error(`Error: ${sessionId}, ${error.message}`);
 });
 ```

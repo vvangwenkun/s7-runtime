@@ -11,6 +11,8 @@ All notable changes to this project will be documented in this file.
 - Read/Write data from a PLC
 - Heartbeat support (sequence / toggle)
 - Auto reconnect
+- Add usage examples for `S7ClientSession` and `S7ScheduleClient`
+- Update `README.md` and `doc/session.md` with `S7ClientSession` event handling examples
 
 ### Changed
 
