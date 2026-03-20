@@ -9,7 +9,7 @@ A production-grade S7 PLC communication library built on `node-snap7`, featuring
 ✅ Layered Design: Lightweight IO client + high-availability session layer (choose as needed)  
 ✅ Auto Reconnection: Exponential backoff retry on connection failures (configurable strategy)  
 ✅ Heartbeat Detection: Toggle-bit/sequence heartbeat modes to detect connection status in real-time  
-✅ Concurrent Scheduling: Multi-priority IO queues (NORMAL/URGENT/HEARTBEAT/RECONNECT) to avoid buffer conflicts  
+✅ Concurrent Scheduling: Multi-priority IO queues (NORMAL/URGENT/HEARTBEAT/RECONNECT) to eliminate concurrent access conflicts on shared resources (Job/Buffer) in asynchronous scenarios  
 ✅ State Management: State machine-based connection lifecycle with event-driven state notifications  
 ✅ Strict Validation: Built-in input validation to prevent illegal operations  
 ✅ Friendly Error Handling: Classified S7 error types with error codes and context  
@@ -18,7 +18,7 @@ A production-grade S7 PLC communication library built on `node-snap7`, featuring
 ✅ **分层设计**：轻量 IO 客户端 + 高可用会话层，按需选择  
 ✅ **自动重连**：连接异常时指数退避重试，可配置重试策略  
 ✅ **心跳检测**：支持位翻转/序列两种心跳模式，及时感知连接状态  
-✅ **并发调度**：多优先级 IO 队列，避免共享缓冲区混乱，支持 NORMAL/URGENT/HEARTBEAT/RECONNECT 四级优先级  
+✅ **并发调度**：多优先级 IO 队列，避免异步回调导致的共享资源（Job/Buffer）并发访问冲突，支持 NORMAL/URGENT/HEARTBEAT/RECONNECT 四级优先级  
 ✅ **完善的状态管理**：基于状态机的连接生命周期管理，事件化状态通知  
 ✅ **严格的参数校验**：内置输入参数校验，提前规避非法操作  
 ✅ **友好的错误处理**：分类封装 S7 错误类型，附带错误码和上下文信息  

@@ -263,7 +263,7 @@ interface S7ClientSessionOptions {
 | connecting   | `(sessionId: string)`                  | Emitted when connection attempt starts   |
 | reconnecting | `(sessionId: string, attempt: number)` | Emitted when reconnection attempt starts |
 | connState    | `(prev: State, next: State)`           | Emitted when connection state changes    |
-| error        | `(sessionId: string, error: Error)`    | Emitted when error occurs                |
+| runtimeError | `(sessionId: string, error: Error)`    | Emitted when error occurs                |
 
 ### Example | 示例
 

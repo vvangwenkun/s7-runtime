@@ -19,7 +19,7 @@
 
 [S7ScheduleClient](../src/runtime/client/S7ScheduleClient.ts#L78-L733) is a secondary encapsulation of `node-snap7` that provides:
 
-- **Concurrency Control**: Serializes IO operations to prevent shared buffer corruption
+- **Concurrency Control**: Serializes IO operations to prevent concurrent access conflicts on shared resources (Job/Buffer) in asynchronous scenarios
 - **Promise-Based API**: Converts all callback operations to `Promise/async-await`
 - **Timeout Management**: Built-in timeout control for all IO operations
 - **Priority Scheduling**: Supports `NORMAL`, `URGENT`, `RECONNECT`, and `HEARTBEAT` priority levels
@@ -27,7 +27,7 @@
 
 [S7ScheduleClient](../src/runtime/client/S7ScheduleClient.ts#L78-L733) 是 `node-snap7` 的二次封装，提供以下功能：
 
-- **并发控制**：串行化 IO 操作，防止共享缓冲区数据混乱
+- **并发控制**：串行化 IO 操作，避免异步调用下共享资源（Job/Buffer）并发访问冲突
 - **Promise 风格 API**：将所有回调操作转换为 `Promise/async-await`
 - **超时管理**：所有 IO 操作内置超时控制
 - **优先级调度**：支持 `NORMAL`, `URGENT`, `RECONNECT`, and `HEARTBEAT` 优先级
