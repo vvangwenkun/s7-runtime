@@ -251,6 +251,9 @@ describe('S7ClientSession', () => {
 			const s7Error = new S7Error(
 				'Conn Refused',
 				S7ErrorCode.ECONNREFUSED,
+				{
+					retryable: true,
+				},
 			);
 			const effect = {
 				type: EffectType.START_RETRY_TIMER,

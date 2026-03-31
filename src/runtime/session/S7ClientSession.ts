@@ -52,12 +52,6 @@ export class S7ClientSession
 	private ioTracker = new IOTracker();
 	private heartbeatSignalBuf = Buffer.alloc(2);
 
-	private static readonly RETRYABLE_ERRORS = new Set([
-		S7ErrorCode.ECONNREFUSED,
-		S7ErrorCode.ECONNRESET,
-		S7ErrorCode.ETIMEDOUT,
-	]);
-
 	constructor(
 		options: S7ClientSessionOptions,
 		private logger: Logger = consoleLogger,
@@ -142,10 +136,10 @@ export class S7ClientSession
 	getCpInfo!: SessionIOMethods['getCpInfo'];
 	plcStatus!: SessionIOMethods['plcStatus'];
 
-	private shouldReconnect(code: S7ErrorCode) {
+	private shouldReconnect(error: S7Error) {
 		if (this.options.reconnect.disable) return false;
 
-		return S7ClientSession.RETRYABLE_ERRORS.has(code);
+		return error.retryable;
 	}
 
 	private bindingIO() {
@@ -349,7 +343,7 @@ export class S7ClientSession
 
 					if (
 						e.payload instanceof S7Error &&
-						this.shouldReconnect(e.payload.code)
+						this.shouldReconnect(e.payload)
 					) {
 						this.logger.debug({
 							message: 'start reconnect retry',
