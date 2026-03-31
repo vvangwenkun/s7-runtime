@@ -49,6 +49,7 @@ describe('Heartbeat Class', () => {
 			interval: 1000,
 			maxFailures: 3,
 			ping: mockPingFn,
+			suppressWithTraffic: true,
 		});
 	});
 
@@ -128,6 +129,7 @@ describe('Heartbeat Class', () => {
 			interval: 1000,
 			maxFailures: 3,
 			ping: mockPingFn,
+			suppressWithTraffic: true,
 		});
 
 		const heartbeat = new Heartbeat(mockIoTracker, {} as HeartbeatOptions);
@@ -201,6 +203,7 @@ describe('Heartbeat Class', () => {
 			interval: 1000,
 			maxFailures: 1,
 			ping: mockPingFn,
+			suppressWithTraffic: true,
 		});
 
 		const heartbeat = new Heartbeat(mockIoTracker, {} as HeartbeatOptions);
@@ -232,6 +235,7 @@ describe('Heartbeat Class', () => {
 			interval: 1000,
 			maxFailures: 0,
 			ping: mockPingFn,
+			suppressWithTraffic: true,
 		});
 
 		const heartbeat = new Heartbeat(mockIoTracker, {} as HeartbeatOptions);

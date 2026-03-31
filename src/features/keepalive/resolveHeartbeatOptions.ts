@@ -13,6 +13,9 @@ export function resolveHeartbeatOptions(
 		maxFailures:
 			options.maxFailures || DEFAULT_HEARTBEAT_OPTIONS.maxFailures,
 		mode: options.mode ?? DEFAULT_HEARTBEAT_OPTIONS.mode,
+		suppressWithTraffic:
+			options.suppressWithTraffic ??
+			DEFAULT_HEARTBEAT_OPTIONS.suppressWithTraffic,
 		ping: options.ping,
 	};
 

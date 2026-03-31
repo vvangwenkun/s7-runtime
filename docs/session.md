@@ -237,13 +237,14 @@ interface S7ClientSessionOptions {
 
 ### HeartbeatOptions | 心跳选项
 
-| Property | Type                                                                    | Default      | Description                     |
-| -------- | ----------------------------------------------------------------------- | ------------ | ------------------------------- |
-| interval | `number`                                                                | `5000`       | Heartbeat interval (ms)         |
-| timeout  | `number`                                                                | `2000`       | Heartbeat timeout (ms)          |
-| dbNumber | `number`                                                                | -            | Target DB number                |
-| start    | `number`                                                                | -            | Start offset in DB              |
-| mode     | [HeartbeatPingMode](../src/features/keepalive/Heartbeat.types.ts#L2-L5) | `TOGGLE_BIT` | Ping mode (TOGGLE_BIT/SEQUENCE) |
+| Property            | Type                                                                    | Default      | Description                                 |
+| ------------------- | ----------------------------------------------------------------------- | ------------ | ------------------------------------------- |
+| interval            | `number`                                                                | `5000`       | Heartbeat interval (ms)                     |
+| timeout             | `number`                                                                | `2000`       | Heartbeat timeout (ms)                      |
+| dbNumber            | `number`                                                                | -            | Target DB number                            |
+| start               | `number`                                                                | -            | Start offset in DB                          |
+| mode                | [HeartbeatPingMode](../src/features/keepalive/Heartbeat.types.ts#L2-L5) | `TOGGLE_BIT` | Ping mode (TOGGLE_BIT/SEQUENCE)             |
+| suppressWithTraffic | `boolean`                                                               | `true`       | Suppress heartbeat when traffic is detected |
 
 **Note**:
 
@@ -418,6 +419,7 @@ async function main() {
 			mode: HeartbeatPingMode.TOGGLE_BIT,
 			dbNumber: 2026,
 			start: 0,
+			suppressWithTraffic: false,
 		},
 	});
 

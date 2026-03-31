@@ -9,6 +9,7 @@ export interface HeartbeatOptions {
 	interval?: number;
 	maxFailures?: number;
 	mode?: HeartbeatPingMode;
+	suppressWithTraffic?: boolean;
 	ping: (signal: number) => Promise<void>;
 }
 

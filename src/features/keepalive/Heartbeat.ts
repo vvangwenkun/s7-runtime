@@ -60,6 +60,8 @@ export class Heartbeat extends EventEmitter<HeartbeatEvents> {
 	}
 
 	private shouldSkip() {
+		if (!this.options.suppressWithTraffic) return false;
+
 		return (
 			Date.now() - this.ioTracker.getLastCallSuccessTime() <
 			this.options.interval
