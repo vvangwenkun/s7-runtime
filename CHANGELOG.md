@@ -27,3 +27,13 @@ All notable changes to this project will be documented in this file.
 
 - add buffer length validation in S7ScheduleClient
 - clean up IOScheduler tests
+
+## [0.2.0] - 2026-03-31
+
+### Fixed
+
+- corrected Snap7 error code mapping for accurate TCP error identification
+
+### Changed
+
+- add a retryable flag to distinguish recoverable errors

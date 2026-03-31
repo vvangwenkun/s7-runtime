@@ -16,6 +16,7 @@ export class S7Error extends Error {
 	name = 'S7Error';
 	context: S7ErrContext | undefined;
 	errno: number | undefined;
+	retryable = false;
 
 	constructor(
 		message: string,
@@ -23,6 +24,7 @@ export class S7Error extends Error {
 		options?: {
 			context?: S7ErrContext | undefined;
 			errno?: number;
+			retryable?: boolean;
 		},
 	) {
 		super(message);
@@ -33,6 +35,7 @@ export class S7Error extends Error {
 
 		this.errno = options?.errno;
 		this.context = options?.context;
+		this.retryable = options?.retryable ?? false;
 	}
 
 	toJSON() {
@@ -41,6 +44,7 @@ export class S7Error extends Error {
 			message: this.message,
 			code: this.code,
 			errno: this.errno,
+			retryable: this.retryable,
 			context: this.context,
 		};
 	}

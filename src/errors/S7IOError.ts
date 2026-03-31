@@ -1,5 +1,7 @@
 import { S7Error, S7ErrorCode } from './S7Error.js';
 
+const ErrMask = 0x0000ffff;
+
 enum S7NativeErrorCodes {
 	// Unix/macOS
 	ECONNREFUSED_UNIX = 61,
@@ -37,10 +39,22 @@ export class S7IOError extends S7Error {
 			};
 		},
 	) {
-		const code = options.errno
-			? (snap7ErrorMap[options.errno] ?? S7ErrorCode.EIO)
-			: S7ErrorCode.EIO;
+		let code = S7ErrorCode.EIO;
+		let retryable = false;
 
-		super(message, code, options);
+		if (options.errno !== undefined) {
+			const retryableCode =
+				snap7ErrorMap[options.errno] ??
+				snap7ErrorMap[options.errno & ErrMask];
+			if (retryableCode) {
+				code = retryableCode;
+				retryable = true;
+			}
+		}
+
+		super(message, code, {
+			...options,
+			retryable,
+		});
 	}
 }
