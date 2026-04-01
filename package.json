@@ -1,6 +1,6 @@
 {
 	"name": "@teamwang-design/s7-runtime",
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"description": "S7 Protocol Runtime Library",
 	"license": "MIT",
 	"publishConfig": {
