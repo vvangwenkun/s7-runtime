@@ -15,6 +15,7 @@ export const DEFAULT_S7_CLIENT_RUNTIME_OPTIONS = {
 		interval: 2000,
 		maxFailures: 5,
 		mode: HeartbeatPingMode.TOGGLE_BIT,
+		suppressWithTraffic: true,
 	},
 	reconnect: {
 		disable: false,

@@ -111,6 +111,7 @@ const session = new S7ClientSession({
 		mode: HeartbeatPingMode.TOGGLE_BIT, // Toggle-bit heartbeat mode
 		dbNumber: 10, // Heartbeat DB number
 		start: 0, // Heartbeat offset
+		suppressWithTraffic: false, // suppress heartbeat when traffic is detected
 	},
 });
 

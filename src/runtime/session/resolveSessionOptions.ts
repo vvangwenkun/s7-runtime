@@ -39,6 +39,9 @@ export function resolveSessionOptions(
 			mode:
 				options.heartbeat.mode ??
 				DEFAULT_S7_CLIENT_RUNTIME_OPTIONS.heartbeat.mode,
+			suppressWithTraffic:
+				options.heartbeat.suppressWithTraffic ??
+				DEFAULT_S7_CLIENT_RUNTIME_OPTIONS.heartbeat.suppressWithTraffic,
 		},
 		reconnect: {
 			disable:

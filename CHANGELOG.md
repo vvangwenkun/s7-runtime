@@ -39,3 +39,9 @@ All notable changes to this project will be documented in this file.
 - add a retryable flag to distinguish recoverable errors
 - improve retry logic in S7ClientSession
 - add suppressWithTraffic flag to disable heartbeat when IO traffic is detected
+
+## [0.2.1] - 2026-04-01
+
+### Fixed
+
+- add suppressWithTraffic heartbeat option for S7ClientSession

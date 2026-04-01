@@ -66,7 +66,7 @@ export function validateSessionOptions(
 		});
 
 	if (options.heartbeat.maxFailures < 1)
-		throw new S7ValidationError('heartbeat.interval must be >= 1', {
+		throw new S7ValidationError('heartbeat.maxFailures must be >= 1', {
 			value: options.heartbeat.maxFailures,
 		});
 

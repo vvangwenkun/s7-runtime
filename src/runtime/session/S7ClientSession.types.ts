@@ -10,6 +10,7 @@ interface HeartbeatOptions {
 	interval?: number;
 	maxFailures?: number;
 	mode?: HeartbeatPingMode;
+	suppressWithTraffic?: boolean;
 }
 
 interface ReconnectOptions {
